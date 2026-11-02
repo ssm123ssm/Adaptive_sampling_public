@@ -156,8 +156,8 @@ weighted_interval <- function(values, weights, credibility) {
   sorted_values <- values[ordering]
   cumulative <- cumsum(weights[ordering]) / sum(weights)
   tail_probability <- (1 - credibility) / 2
-  lower <- sorted_values[[which(cumulative >= tail_probability)[1]]]
-  upper <- sorted_values[[which(cumulative >= 1 - tail_probability)[1]]]
+  lower <- sorted_values[[which(cumulative >= tail_probability - 1e-12)[1]]]
+  upper <- sorted_values[[which(cumulative >= 1 - tail_probability - 1e-12)[1]]]
   c(
     mean = sum(values * weights) / sum(weights),
     lower = lower,

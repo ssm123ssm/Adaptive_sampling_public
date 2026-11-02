@@ -70,8 +70,8 @@ weighted_interval <- function(values, weights, credibility) {
   values <- values[ordering]
   cumulative <- cumsum(weights[ordering]) / sum(weights)
   tail_probability <- (1 - credibility) / 2
-  lower <- values[which(cumulative >= tail_probability)[1]]
-  upper <- values[which(cumulative >= 1 - tail_probability)[1]]
+  lower <- values[which(cumulative >= tail_probability - 1e-12)[1]]
+  upper <- values[which(cumulative >= 1 - tail_probability - 1e-12)[1]]
   c(lower = lower, upper = upper, width = upper - lower)
 }
 
