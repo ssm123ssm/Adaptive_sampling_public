@@ -60,7 +60,7 @@ normalise_log_weights <- function(log_weights) {
 systematic_resample <- function(weights) {
   n <- length(weights)
   positions <- (runif(1) + 0:(n - 1)) / n
-  cumulative <- cumsum(weights)
+  cumulative <- pmin(cumsum(weights), 1)
   cumulative[[n]] <- 1
   findInterval(positions, c(0, cumulative), rightmost.closed = TRUE)
 }
